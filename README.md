@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+# OMDB Movie Search
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+In this project I crate a React app that does search movies using https://omdbapi.com/ API,it will search for all titles matching user input and displays UI based on output from said API.
+
+This project was Implemented using [Create React App](https://github.com/facebook/create-react-app),[Type Script](https://www.typescriptlang.org/), [Styled Components](https://styled-components.com/). I used TDD approach for this project and used [Cypress](https://www.cypress.io/) for end-to-end tests.
 
 ## Available Scripts
 
@@ -18,6 +20,10 @@ You will also see any lint errors in the console.
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `npm cypress`
+
+Launches the Cypress for running tests.
 
 ### `npm run build`
 
