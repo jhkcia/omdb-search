@@ -1,0 +1,55 @@
+{
+    "Search": [
+        {
+            "Title": "God the Father",
+            "Year": "2014",
+            "imdbID": "tt3722118",
+            "Type": "movie",
+            "Poster": "https://m.media-amazon.com/images/M/MV5BMTkzODYzNjYyNl5BMl5BanBnXkFtZTgwNjM0NjA5MjE@._V1_SX300.jpg"
+        },
+        {
+            "Title": "God Father",
+            "Year": "2020",
+            "imdbID": "tt11531324",
+            "Type": "movie",
+            "Poster": "https://m.media-amazon.com/images/M/MV5BOGYzODZhMmYtODI0Yy00ZTliLTgwMzYtN2Y3YjAxOTgxMDY0XkEyXkFqcGdeQXVyMTEzNTkzNzI2._V1_SX300.jpg"
+        },
+        {
+            "Title": "My God! Father",
+            "Year": "2020",
+            "imdbID": "tt13476378",
+            "Type": "movie",
+            "Poster": "https://m.media-amazon.com/images/M/MV5BMjYzOTQ4NzItYTliMS00Nzc1LWEzNTctMDY5MGU5YWMxNmYxXkEyXkFqcGdeQXVyMTEzNDczNjY3._V1_SX300.jpg"
+        },
+        {
+            "Title": "God Father",
+            "Year": "1996",
+            "imdbID": "tt15164290",
+            "Type": "movie",
+            "Poster": "N/A"
+        },
+        {
+            "Title": "God Father",
+            "Year": "1992",
+            "imdbID": "tt15387126",
+            "Type": "movie",
+            "Poster": "N/A"
+        },
+        {
+            "Title": "God Father",
+            "Year": "2017",
+            "imdbID": "tt12994556",
+            "Type": "movie",
+            "Poster": "N/A"
+        },
+        {
+            "Title": "God, Country, Notre Dame: The Story of Father Ted Hesburgh, C.S.C.",
+            "Year": "2005",
+            "imdbID": "tt1734573",
+            "Type": "movie",
+            "Poster": "N/A"
+        }
+    ],
+    "totalResults": "7",
+    "Response": "True"
+}
