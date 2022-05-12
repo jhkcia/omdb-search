@@ -1,0 +1,11 @@
+{
+  "files": {
+    "main.js": "/omdb-search/static/js/main.589e0cef.js",
+    "static/media/searchIcon.png": "/omdb-search/static/media/searchIcon.6b9df4d88fe817625b54.png",
+    "index.html": "/omdb-search/index.html",
+    "main.589e0cef.js.map": "/omdb-search/static/js/main.589e0cef.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.589e0cef.js"
+  ]
+}
