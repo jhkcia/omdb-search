@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import humps from "humps";
-import { IMovieSearchResult } from "../MovieCard/IMovieSearchResult";
+import { IMovieSearchResult } from "./IMovieSearchResult";
 
 class MovieApi {
     private static instance: MovieApi;

@@ -1,4 +1,4 @@
-import { IMovie } from "./IMovie";
+import { IMovie } from "../MovieCard/IMovie";
 
 export interface IMovieSearchResult {
     response: boolean;
