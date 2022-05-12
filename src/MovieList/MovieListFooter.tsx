@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 type MovieListFooterProps = {
-    hasMore: boolean;
-    handleLoadMore: () => void;
+    page: number;
+    count: number;
+    onChange: (page: number) => void;
 }
 
 export const SearchResultDiv = styled.div`
@@ -20,12 +21,15 @@ const Button = styled.button`
   border-radius: 3px;
   cursor: pointer;
 `;
-export function MovieListFooter({ hasMore, handleLoadMore }: MovieListFooterProps): JSX.Element {
+export function MovieListFooter({ page, count, onChange }: MovieListFooterProps): JSX.Element {
 
     return (
         <SearchResultDiv>
             {
-                hasMore && <Button onClick={handleLoadMore}>Load More</Button>
+                page > 1 && <Button data-testid="previousPageTest" onClick={() => onChange(page - 1)}>Previous page</Button>
+            }
+            {
+                page <count && <Button data-testid="nextPageTest" onClick={() => onChange(page + 1)}>Next page</Button>
             }
         </SearchResultDiv>
     )

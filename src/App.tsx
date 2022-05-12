@@ -13,7 +13,6 @@ function App() {
   const [apiError, setApiError] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalResults, setTotalResults] = useState<number>(1);
-  const [hasMore, setHasMore] = useState<boolean>(false);
 
 
   const handleSearchQuery = (query: string) => {
@@ -31,12 +30,6 @@ function App() {
         setTotalResults(response.data.totalResults);
       }
 
-      if (response.data.totalResults && response.data.search) {
-        setHasMore(pageSize * (currentPage - 1) + response.data.search.length < response.data.totalResults);
-      } else {
-        setHasMore(false);
-      }
-
       setApiError(response.data.error ?? '');
 
     })
@@ -44,16 +37,12 @@ function App() {
   }, [currentPage, currentQuery])
 
 
-  const handleLoadMore = () => {
-    setCurrentPage(currentPage + 1);
-
-  }
 
   return <>
     <SearchArea handleSearchQuery={handleSearchQuery} />
     <MovieListHeader query={currentQuery} pageNumber={currentPage} totalResults={totalResults} error={apiError} />
     <MovieList items={movies} />
-    <MovieListFooter hasMore={hasMore} handleLoadMore={handleLoadMore} />
+    <MovieListFooter page={currentPage} onChange={setCurrentPage} count={Math.ceil(totalResults / pageSize)} />
   </>;
 }
 
