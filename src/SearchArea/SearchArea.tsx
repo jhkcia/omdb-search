@@ -44,7 +44,8 @@ export function SearchArea({ handleSearchQuery }: SearchAreaProps): JSX.Element 
     return (
         <Container>
             <Searchbox data-testid="queryText" value={query}
-                onChange={(event) => setQuery(event.target.value)} />
+                onChange={(event) => setQuery(event.target.value)} 
+                onKeyDown={(e)=>e.key==='Enter' && handleSearchQuery(query)}/>
             <SearchIconWrapper data-testid="searchButton" onClick={() => handleSearchQuery(query)}>
                 <Logo src={searchIcon} />
             </SearchIconWrapper>
