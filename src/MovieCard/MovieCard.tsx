@@ -25,9 +25,8 @@ const RootWrapper = styled(Wrapper)`
 export const Image = styled.img`
     height: 8em;
 `
-export const Text = styled.text`
+export const Text = styled.h5`
     color:${(props) => props.color ? props.color : "#131A22"};
-    font-size:${(props) => props.fontSize ? props.fontSize : ".9em"};
 `
 export function MovieCard({ item }: MovieCardProps): JSX.Element {
 
@@ -38,7 +37,7 @@ export function MovieCard({ item }: MovieCardProps): JSX.Element {
                 <Image data-testid="posterImage" src={item.poster} />
             </ImageContainer>
             <Text data-testid="titleText">{item.title}</Text>
-            <Text data-testid="typeText" fontSize=".8em" color="grey" >{item.type}</Text>
+            <Text data-testid="typeText" color="grey" >{item.type}</Text>
 
             <Wrapper>
                 <Text color="blue" data-testid="yearText">{item.year}</Text>

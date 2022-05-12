@@ -1,56 +1,59 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MovieApi from "./api/MovieApi";
-import { IMovieSearchResult } from "./MovieCard/IMovieSearchResult";
-import { MovieCardList } from "./MovieCard/MovieCardList";
+import { IMovie } from "./MovieCard/IMovie";
+import { MovieList } from "./MovieList/MovieList";
+import { MovieListFooter } from "./MovieList/MovieListFooter";
+import { MovieListHeader } from "./MovieList/MovieListHeader";
 import { SearchArea } from "./SearchArea/SearchArea";
 
-const sample = {
-  search: [{
-    title: "My God! Father",
-    year: "2020",
-    imdbID: "tt13476378",
-    type: "movie",
-    poster: "https://m.media-amazon.com/images/M/MV5BMjYzOTQ4NzItYTliMS00Nzc1LWEzNTctMDY5MGU5YWMxNmYxXkEyXkFqcGdeQXVyMTEzNDczNjY3._V1_SX300.jpg"
-  },
-  {
-    title: "My God! Father",
-    year: "2020",
-    imdbID: "tt13476378",
-    type: "movie",
-    poster: "https://m.media-amazon.com/images/M/MV5BMjYzOTQ4NzItYTliMS00Nzc1LWEzNTctMDY5MGU5YWMxNmYxXkEyXkFqcGdeQXVyMTEzNDczNjY3._V1_SX300.jpg"
-  },
-  {
-    title: "My God! Father",
-    year: "2020",
-    imdbID: "tt13476378",
-    type: "movie",
-    poster: "https://m.media-amazon.com/images/M/MV5BMjYzOTQ4NzItYTliMS00Nzc1LWEzNTctMDY5MGU5YWMxNmYxXkEyXkFqcGdeQXVyMTEzNDczNjY3._V1_SX300.jpg"
-  },
-  {
-    title: "My God! Father",
-    year: "2020",
-    imdbID: "tt13476378",
-    type: "movie",
-    poster: "https://m.media-amazon.com/images/M/MV5BMjYzOTQ4NzItYTliMS00Nzc1LWEzNTctMDY5MGU5YWMxNmYxXkEyXkFqcGdeQXVyMTEzNDczNjY3._V1_SX300.jpg"
-  }], totalResults: 10,
-  response: true
-
-};
-
 function App() {
+  const pageSize = 10;
+  const [movies, setMovies] = useState<IMovie[]>([]);
+  const [currentQuery, setCurrentQuery] = useState<string>("");
+  const [apiError, setApiError] = useState<string>("");
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [totalResults, setTotalResults] = useState<number>(1);
+  const [hasMore, setHasMore] = useState<boolean>(false);
+
+
   const handleSearchQuery = (query: string) => {
     setCurrentQuery(query);
-    MovieApi.getInstance().search(query, 1).then((response) => {
-      setSearchResult(response.data);
-    })
+    setCurrentPage(1);
   }
+  useEffect(() => {
+    MovieApi.getInstance().search(currentQuery, currentPage).then((response) => {
+      if (response.data.search) {
+        setMovies(response.data.search)
+      } else {
+        setMovies([]);
+      }
+      if (response.data.totalResults) {
+        setTotalResults(response.data.totalResults);
+      }
 
-  const [searchResult, setSearchResult] = useState<IMovieSearchResult>(sample);
-  const [currentQuery, setCurrentQuery] = useState<string>("");
+      if (response.data.totalResults && response.data.search) {
+        setHasMore(pageSize * (currentPage - 1) + response.data.search.length < response.data.totalResults);
+      } else {
+        setHasMore(false);
+      }
+
+      setApiError(response.data.error ?? '');
+
+    })
+
+  }, [currentPage, currentQuery])
+
+
+  const handleLoadMore = () => {
+    setCurrentPage(currentPage + 1);
+
+  }
 
   return <>
     <SearchArea handleSearchQuery={handleSearchQuery} />
-    <MovieCardList result={searchResult} query={currentQuery} />
+    <MovieListHeader query={currentQuery} pageNumber={currentPage} totalResults={totalResults} error={apiError} />
+    <MovieList items={movies} />
+    <MovieListFooter hasMore={hasMore} handleLoadMore={handleLoadMore} />
   </>;
 }
 
