@@ -39,16 +39,18 @@ const sample = {
 
 function App() {
   const handleSearchQuery = (query: string) => {
+    setCurrentQuery(query);
     MovieApi.getInstance().search(query, 1).then((response) => {
       setSearchResult(response.data);
     })
   }
 
   const [searchResult, setSearchResult] = useState<IMovieSearchResult>(sample);
+  const [currentQuery, setCurrentQuery] = useState<string>("");
 
   return <>
     <SearchArea handleSearchQuery={handleSearchQuery} />
-    <MovieCardList result={searchResult} />
+    <MovieCardList result={searchResult} query={currentQuery} />
   </>;
 }
 

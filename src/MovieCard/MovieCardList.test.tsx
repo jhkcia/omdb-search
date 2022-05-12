@@ -16,11 +16,12 @@ describe('<MovieCardList />', () => {
         response: true
       };
 
-      render(<MovieCardList result={result} />);
+      render(<MovieCardList result={result} query="Father" />);
 
       expect(screen.getByTestId('titleText')).toHaveTextContent(result.search[0].title);
       expect(screen.getByTestId('typeText')).toHaveTextContent(result.search[0].type);
       expect(screen.getByTestId('yearText')).toHaveTextContent(result.search[0].year);
+      expect(screen.getByTestId('currentQueryText')).toHaveTextContent("Father");
 
       expect((screen.getByTestId('posterImage') as HTMLImageElement).src).toEqual(result.search[0].poster);
     });
@@ -29,7 +30,7 @@ describe('<MovieCardList />', () => {
         response: false,
         error: 'Movie not found!'
       }
-      render(<MovieCardList result={result} />);
+      render(<MovieCardList result={result} query="asdfasdf" />);
 
       expect(screen.getByTestId('errorText')).toHaveTextContent(result.error);
     });
