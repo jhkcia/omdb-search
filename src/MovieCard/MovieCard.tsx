@@ -22,26 +22,40 @@ export const ImageContainer = styled.div`
 const RootWrapper = styled(Wrapper)`
     padding: 10px;
 `
+const InfoWrapper = styled(Wrapper)`
+    padding: 10px;
+    flex-direction: column;
+
+`
 export const Image = styled.img`
     height: 8em;
 `
-export const Text = styled.h5`
+export const Text = styled.span`
     color:${(props) => props.color ? props.color : "#131A22"};
 `
-export function MovieCard({ item }: MovieCardProps): JSX.Element {
 
+export const Chip = styled.button`
+    color:${(props) => props.color ? props.color : "#131A22"};
+    margin: 0.5em 0 0.5em 0 ;
+    width:80px;
+    padding: 0.25em 1em;
+    border: 2px solid palevioletred;
+    border-radius: 3px;
+`
+
+export function MovieCard({ item }: MovieCardProps): JSX.Element {
 
     return (
         <RootWrapper direction="row">
             <ImageContainer>
                 <Image data-testid="posterImage" src={item.poster === 'N/A' ? '/no-poster.png' : item.poster} />
             </ImageContainer>
-            <Text data-testid="titleText">{item.title}</Text>
-            <Text data-testid="typeText" color="grey" >{item.type}</Text>
+            <InfoWrapper >
+                <Text data-testid="titleText">{item.title}</Text>
+                <Chip data-testid="typeText" color={item.type === "movie" ? "grey" : item.type === "green" ? "blue" : "orange"} >{item.type}</Chip>
 
-            <Wrapper>
                 <Text color="blue" data-testid="yearText">{item.year}</Text>
-            </Wrapper>
+            </InfoWrapper>
 
         </RootWrapper>
     )
