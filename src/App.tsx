@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import MovieApi from "./api/MovieApi";
 import { IMovie } from "./MovieCard/IMovie";
 import { MovieList } from "./MovieList/MovieList";
@@ -20,19 +20,15 @@ function App() {
     setCurrentPage(1);
   }
   useEffect(() => {
-    MovieApi.getInstance().search(currentQuery, currentPage).then((response) => {
-      if (response.data.search) {
-        setMovies(response.data.search)
-      } else {
-        setMovies([]);
-      }
-      if (response.data.totalResults) {
-        setTotalResults(response.data.totalResults);
-      }
-
-      setApiError(response.data.error ?? '');
-
-    })
+    if (currentQuery && currentQuery !== "") {
+      MovieApi.getInstance().search(currentQuery, currentPage).then((response) => {
+        setMovies(response.data.search ?? []);
+        setTotalResults(response.data.totalResults ?? 0);
+        setApiError(response.data.error ?? '');
+      });
+    } else {
+      setMovies([]);
+    }
 
   }, [currentPage, currentQuery])
 
@@ -42,9 +38,9 @@ function App() {
 
   return <>
     <SearchArea handleSearchQuery={handleSearchQuery} />
-    <MovieListHeader query={currentQuery} pageNumber={currentPage} totalResults={totalResults} error={apiError} />
+    {currentQuery && <MovieListHeader query={currentQuery} pageNumber={currentPage} totalResults={totalResults} error={apiError} />}
     <MovieList items={movies} />
-    {pageCount>1 && <MovieListFooter page={currentPage} onChange={setCurrentPage} count={pageCount} />}
+    {pageCount > 1 && <MovieListFooter page={currentPage} onChange={setCurrentPage} count={pageCount} />}
   </>;
 }
 
