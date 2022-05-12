@@ -34,7 +34,7 @@ export function MovieCard({ item }: MovieCardProps): JSX.Element {
     return (
         <RootWrapper direction="row">
             <ImageContainer>
-                <Image data-testid="posterImage" src={item.poster} />
+                <Image data-testid="posterImage" src={item.poster === 'N/A' ? '/no-poster.png' : item.poster} />
             </ImageContainer>
             <Text data-testid="titleText">{item.title}</Text>
             <Text data-testid="typeText" color="grey" >{item.type}</Text>

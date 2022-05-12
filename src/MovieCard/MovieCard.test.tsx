@@ -20,5 +20,18 @@ describe('<MovieCard />', () => {
 
       expect((screen.getByTestId('posterImage') as HTMLImageElement).src).toEqual(item.poster);
     });
+    it('show default poster on N/A poster', async () => {
+      let item = {
+        title: "My God! Father",
+        year: "2020",
+        imdbID: "tt13476378",
+        type: "movie",
+        poster: "N/A"
+      };
+
+      render(<MovieCard item={item} />);
+
+      expect((screen.getByTestId('posterImage') as HTMLImageElement).src).toEqual('http://localhost/no-poster.png');
+    });
   });
 });
