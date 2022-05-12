@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import MovieApi from "./api/MovieApi";
 import { IMovie } from "./MovieCard/IMovie";
 import { MovieList } from "./MovieList/MovieList";
@@ -36,13 +36,15 @@ function App() {
 
   }, [currentPage, currentQuery])
 
-
+  const pageCount = useMemo(() => {
+    return Math.ceil(totalResults / pageSize);
+  }, [totalResults]);
 
   return <>
     <SearchArea handleSearchQuery={handleSearchQuery} />
     <MovieListHeader query={currentQuery} pageNumber={currentPage} totalResults={totalResults} error={apiError} />
     <MovieList items={movies} />
-    <MovieListFooter page={currentPage} onChange={setCurrentPage} count={Math.ceil(totalResults / pageSize)} />
+    {pageCount>1 && <MovieListFooter page={currentPage} onChange={setCurrentPage} count={pageCount} />}
   </>;
 }
 
