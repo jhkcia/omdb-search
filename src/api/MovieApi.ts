@@ -7,7 +7,7 @@ class MovieApi {
     private axiosInstance: AxiosInstance;
     private constructor(
     ) {
-        this.axiosInstance = axios.create({ baseURL: "http://www.omdbapi.com/" });
+        this.axiosInstance = axios.create({ baseURL: "https://www.omdbapi.com/" });
         this.initializeInterceptor();
     }
     private initializeInterceptor() {
